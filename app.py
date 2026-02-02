@@ -125,7 +125,7 @@ creds = Credentials.from_service_account_info(
 client = gspread.authorize(creds)
 
 # Open sheet
-sheet = client.open("AllerSafe_User_Data").worksheet("data")
+sheet = client.open("AllerSafeUG_User_Data").worksheet("data")
 
 
 def save_user_input(season, temp, humidity, dust, smoke, outdoor_time, medication, symptoms, flare_risk):
