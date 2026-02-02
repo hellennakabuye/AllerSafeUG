@@ -3,6 +3,7 @@ pandas==2.2
 numpy
 scikit-learn
 datetime
+tensorflow
 altair
 gspread
 google-auth
