@@ -4,3 +4,6 @@ numpy
 scikit-learn
 tensorflow
 joblib
+altair
+base64
+datetime
