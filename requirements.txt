@@ -3,7 +3,6 @@ pandas==2.2
 numpy
 scikit-learn
 tensorflow
-joblib
 base64
 datetime
 altair
