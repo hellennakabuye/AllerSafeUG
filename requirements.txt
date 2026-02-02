@@ -6,3 +6,8 @@ tensorflow
 joblib
 base64
 datetime
+altair
+gspread
+google-auth
+seaborn
+matplotlib
