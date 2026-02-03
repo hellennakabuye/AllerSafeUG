@@ -15,7 +15,7 @@ from google.oauth2.service_account import Credentials
 # Page config
 # -----------------------
 st.set_page_config(
-    page_title="Allergy Flare-Up Predictor",
+    page_title="AllerSafeUG",
     page_icon="🌿",
     layout="wide"
 )
