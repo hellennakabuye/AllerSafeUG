@@ -170,13 +170,6 @@ with col1:
     if st.session_state.flare_prob is not None:
         prob = st.session_state.flare_prob
 
-        save_user_input(
-            season, temperature, humidity,
-            dust_level, smoke_level,
-            outdoor_time, medication_used,
-            symptom_score, prob
-        )
-
         st.metric(
             label="Flare-Up Probability",
             value=f"{prob * 100:.1f}%"
