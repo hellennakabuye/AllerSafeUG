@@ -189,7 +189,7 @@ with col1:
             "Medication Used": medication_used,
             "Current Symptom Score": symptom_score,
         }
-        #save_user_input(season, temperature, humidity, dust_level, smoke_level, outdoor_time, medication_used, symptom_score, prob)
+        save_user_input(season, temperature, humidity, dust_level, smoke_level, outdoor_time, medication_used, symptom_score, prob)
 
 
 
