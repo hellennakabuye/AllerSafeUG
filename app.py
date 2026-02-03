@@ -147,26 +147,30 @@ def save_user_input(season, temp, humidity, dust, smoke, outdoor_time, medicatio
 # Flare-Up Prediction
 # =======================
 with col1:
-    # -----------------------
-    # Flare-up session state
-    # -----------------------
     if "flare_prob" not in st.session_state:
         st.session_state.flare_prob = None
 
-    # =======================
-    # Flare-Up Prediction
-    # =======================
     st.subheader("🔮 Flare-Up Prediction")
 
     if st.button("Predict Flare-Up"):
         with st.spinner("Predicting flare-up risk..."):
-            st.session_state.flare_prob = float(
-                lstm_model.predict(X_lstm)[0][0]
+            prob = float(lstm_model.predict(X_lstm)[0][0])
+            st.session_state.flare_prob = prob
+
+            # ✅ SAVE DATA ONLY HERE (ONCE)
+            save_user_input(
+                season,
+                temperature,
+                humidity,
+                dust_level,
+                smoke_level,
+                outdoor_time,
+                medication_used,
+                symptom_score,
+                prob
             )
 
-    # -----------------------
-    # Display result (persistent)
-    # -----------------------
+    # ----- DISPLAY ONLY (NO SAVING HERE) -----
     if st.session_state.flare_prob is not None:
         prob = st.session_state.flare_prob
 
@@ -179,19 +183,6 @@ with col1:
             st.error("⚠️ High Risk of Allergy Flare-Up")
         else:
             st.success("✅ Low Risk of Flare-Up")
-        user_data = {
-            "Season":season,
-            "Temperature": temperature,
-            "Humidity": humidity,
-            "Dust Level": dust_level,
-            "Smoke Level": smoke_level,
-            "Outdoor Time (minutes)": outdoor_time,
-            "Medication Used": medication_used,
-            "Current Symptom Score": symptom_score,
-        }
-        save_user_input(season, temperature, humidity, dust_level, smoke_level, outdoor_time, medication_used, symptom_score, prob)
-
-
 
 # =======================
 # Trigger Analysis
