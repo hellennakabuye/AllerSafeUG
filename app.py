@@ -20,6 +20,44 @@ st.set_page_config(
     layout="wide"
 )
 
+# ---------------- ACCESS CONTROL ---------------- #
+
+# List of authorized organizations
+# You update this after payment
+AUTHORIZED_ORGS = {
+    "mak_clinic": "2026-12-31",
+    "diabetes_uganda": "2026-06-30",
+    "kampala_health": "2026-03-01"
+}
+
+# Get organization from URL
+query_params = st.query_params
+org = query_params.get("org")
+
+if not org:
+    st.error("🔒 Access Restricted")
+    st.markdown("""
+    This tool is licensed to partner health organizations.
+    
+    If you represent a clinic or NGO, please contact:
+    📧 hellennakabuye23@gmail.com
+    """)
+    st.stop()
+
+if org not in AUTHORIZED_ORGS:
+    st.error("🚫 Organization Not Authorized")
+    st.stop()
+
+expiry_date = datetime.strptime(AUTHORIZED_ORGS[org], "%Y-%m-%d")
+
+if datetime.now() > expiry_date:
+    st.error("⛔ Subscription Expired")
+    st.markdown("Please renew your institutional subscription.")
+    st.stop()
+
+# If all checks pass:
+st.success(f"✅ Licensed Access: {org.replace('_', ' ').title()}")
+
 
 def center_image(image_path, width=100):
     with open(image_path, "rb") as f:
